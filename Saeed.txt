@@ -1,0 +1,72 @@
+(DAY 3)
+(07/05/2025)
+
+create database StoredProcedure
+use StoredProcedure
+CREATE TABLE Student (
+    StudentID INT PRIMARY KEY IDENTITY(1,1),
+    Name NVARCHAR(20),
+    City NVARCHAR(20),
+    District NVARCHAR(20),
+    AdmissionDate DATE,             
+    AdmissionTime TIME,            
+    Age int,
+    Class NVARCHAR(20)
+);
+______________________________________________________________________________________________________________________________________
+
+CREATE PROCEDURE Info
+    @Name NVARCHAR(20),
+    @City NVARCHAR(20),
+    @District NVARCHAR(20),
+    @AdmissionDate DATE,
+    @AdmissionTime TIME,
+    @Age int,
+    @Class NVARCHAR(20)
+AS
+BEGIN
+    INSERT INTO Student (
+        Name, City, District, AdmissionDate, AdmissionTime, Age, Class
+    )
+    VALUES (
+        @Name, @City, @District, @AdmissionDate, @AdmissionTime, @Age, @Class
+    );
+END
+
+EXEC Info
+    @Name = 'Faisal',
+    @City = 'Sillod',
+    @District = 'Aurangabad',
+    @AdmissionDate = '2025-05-10',
+    @AdmissionTime = '10:30:00',
+    @Age = 20,
+    @Class = '12th';
+
+------------------------------------------------------------------------------------
+CREATE PROCEDURE UpdateInfo
+    @StudentID INT,
+    @Age int
+AS
+BEGIN
+    UPDATE Student
+    SET Age = @Age
+    WHERE StudentID = @StudentID;
+END
+EXEC UpdateInfo @StudentID = 1, @Age = 75;
+--------------------------------------------------------------------------------------
+CREATE PROCEDURE SearchInfo
+    @StudentID INT
+AS
+BEGIN
+    SELECT * FROM Student WHERE StudentID = @StudentID;
+END
+
+EXEC SearchInfo @StudentID = 1;
+---------------------------------------------------------------------------------------
+CREATE PROCEDURE DeleteInfo
+    @StudentID INT
+AS
+BEGIN
+    DELETE FROM Student WHERE StudentID = @StudentID;
+END
+EXEC DeleteInfo @StudentID = 1;

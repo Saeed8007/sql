@@ -1,0 +1,73 @@
+06/05/2025 
+(DAY 2)	 
+
+	* What is a Stored Procedure?
+
+	A stored procedure is a self contained sub programs which are meant for doing for doing some specific well defined task.
+
+	Stored procedure are named PL/SQL blocks which means they can be stored into database as database object and can be reused.
+---------------------------------------------------------------------------------------------------------------------------------------------------
+	*Create database and Create Table	
+
+	create database Mouse
+	use Mouse
+
+CREATE TABLE Employees (EmployeeID INT PRIMARY KEY IDENTITY(1,1),FirstName NVARCHAR(50),LastName NVARCHAR(50),Department NVARCHAR(50),Salary Decimal(10,2));
+select * from Employees
+--------------------------------------------------------------------------------------------------------
+	*CREATE PROCEDURE InsertEmployee
+    @FirstName NVARCHAR(50),
+    @LastName NVARCHAR(50),
+    @Department NVARCHAR(50),
+    @Salary DECIMAL(10,2)
+AS
+BEGIN
+    INSERT INTO Employees (FirstName, LastName, Department, Salary)
+    VALUES (@FirstName, @LastName, @Department, @Salary);
+END;
+EXEC InsertEmployee 'Faisal', 'Moin', 'BCA', 60000;
+
+--------------------------------------------------------------------------------------------------------
+
+	*CREATE PROCEDURE UpdateEmployeeSalary
+    @EmployeeID INT,
+    @NewSalary DECIMAL(10,2)
+AS
+BEGIN
+    UPDATE Employees
+    SET Salary = @NewSalary
+    WHERE EmployeeID = @EmployeeID;
+END;
+EXEC UpdateEmployeeSalary @EmployeeID = 1, @NewSalary = 75000;
+
+-----------------------------------------------------------------------------------------------------------
+
+	*CREATE PROCEDURE DeleteEmployee
+    @EmployeeID INT
+AS
+BEGIN
+    DELETE FROM Employees
+    WHERE EmployeeID = @EmployeeID;
+END;
+EXEC DeleteEmployee @EmployeeID = 1;
+
+-----------------------------------------------------------------------------------------------------------
+
+CREATE PROCEDURE SearchEmployees
+    @FirstName NVARCHAR(50) = NULL,
+   
+AS
+BEGIN
+    SELECT *
+    FROM Employees
+    WHERE 
+        (@FirstName IS NULL OR FirstName LIKE '%' + @FirstName + '%') AND
+       
+END;
+EXEC SearchEmployees @FirstName = 'Anas';
+EXEC SearchEmployees @FirstName = 'Faisal';
+
+---------------------------------------------------------------------------------------------------------------
+
+
+

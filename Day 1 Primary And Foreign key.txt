@@ -1,0 +1,66 @@
+ --> PRIMARY KEY :
+        
+        *  What is Primary Key ?
+	primary key is a column or a set of columns in a table that uniquely identifies each row in that table.
+	It serves as a fundamental constraint to ensure data integrity and is crucial for establishing relationships with other tables. 
+
+	
+	*  The most significant advantages of a primary key are:
+	It uniquely identifies each row of a table
+	It gets a unique index for each primary key column that helps with faster access
+
+
+	*  The properties of each primary key column or columns are:
+	It enforces uniqueness by not accepting any duplicate values
+	A primary key uniquely identifies each field
+	A table can only take one primary key
+	Primary columns have a maximum length of 900 bytes
+
+	* Example of Priamry Key
+	
+	1>
+	create database FirstProject
+	use FirstProject
+	CREATE TABLE ProjectOne (StudentId int primary key, name  varchar(20),age int, Coures varchar(20),Fees int )
+   	insert into ProjectOne values (1,'saeed',20,'DSD',10000)
+	Select * from ProjectOne
+
+
+	
+
+ --> FOREIGN KEY :
+
+	*  What is FOREIGN KEY
+	The FOREIGN KEY constraint is a key used to link two tables together.
+	A FOREIGN KEY is a field (or collection of fields) in one table that refers to the PRIMARY KEY in another table.
+
+
+	*  The most significant advantages of a foreign key are:
+	Data Integrity: Prevents invalid data entries by enforcing relationships between tables.
+	Maintains Referential Integrity: Guarantees that references between tables are always valid, avoiding broken links.
+
+
+	*  The properties of each foreign key column or columns are:
+	References a Primary/Unique Key: The values in the foreign key column(s) must correspond to existing values in the referenced primary key column(s) of another table (or the same table) or a column(s) with a unique constraint. 
+	Data Type Compatibility: The data type(s) of the foreign key column(s) must be compatible with the data type(s) of the referenced primary/unique key column(s).
+	Enforces Referential Integrity: The database system uses the foreign key constraint to enforce rules regarding data consistency between the related tables.
+
+	1>
+	* Example of Foreign Key
+	CREATE DATABASE intern;
+	USE intern;
+	CREATE TABLE customer (customer_id INT PRIMARY KEY,customer_Name VARCHAR(20),city VARCHAR(20));
+	INSERT INTO customer VALUES (1, 'Anas', 'Sillod');
+	INSERT INTO customer VALUES (2, 'Ali', 'Aurangabad'); 
+
+	
+	SELECT * FROM customer;
+	CREATE TABLE orders (order_id INT PRIMARY KEY,Age int,customer_id INT,FOREIGN KEY (customer_id) REFERENCES customer(customer_id));
+	INSERT INTO orders VALUES (1, 20, 2);
+	SELECT * FROM orders;
+
+	
+	
+	
+
+	 
